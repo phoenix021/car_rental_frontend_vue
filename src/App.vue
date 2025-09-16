@@ -14,13 +14,15 @@ import TheWelcome from './components/TheWelcome.vue'
   </header>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
-    <router-link to="/" class="navbar-brand">Car Rental App</router-link>
-    <div class="navbar-nav">
-      <router-link class="nav-link" to="/customers">Customers</router-link>
-      <router-link class="nav-link" to="/customers/new">Add Customer</router-link>
-      <router-link class="nav-link" to="/vehicles/new">Add Vehicle</router-link>  <!-- Added this -->
-    </div>
-</nav>
+      <router-link to="/" class="navbar-brand">Car Rental App</router-link>
+      <div class="navbar-nav">
+        <router-link class="nav-link" to="/customers">Customers</router-link>
+        <router-link class="nav-link" to="/customers/new">Add Customer</router-link>
+        <router-link class="nav-link" to="/vehicles/new">Add Vehicle</router-link>
+        <router-link class="nav-link" to="/rentals/rent">Rent Vehicle</router-link>
+        <router-link class="nav-link" to="/rentals/rented-vehicles">Rented Vehicles</router-link>
+      </div>
+  </nav>
 
 
   <main>
