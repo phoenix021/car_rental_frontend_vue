@@ -22,6 +22,7 @@ import TheWelcome from './components/TheWelcome.vue'
         <router-link class="nav-link" to="/rentals/rent">Rent Vehicle</router-link>
         <router-link class="nav-link" to="/rentals/rented-vehicles">Rented Vehicles</router-link>
         <router-link class="nav-link" to="/rental/return">Return Vehicle</router-link>
+        <router-link class="nav-link" to="/vehicles">Vehicles</router-link>
       </div>
   </nav>
 
