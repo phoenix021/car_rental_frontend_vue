@@ -6,10 +6,6 @@ import router from './router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'
 
-const app = createApp(App);
-app.use(router);
-app.mount('#app');
-
 function generateRandomVehicles(count = 100) {
   const brands = ['Toyota', 'Honda', 'Ford', 'Chevrolet', 'BMW', 'Nissan', 'Hyundai'];
   const models = ['Camry', 'Civic', 'Focus', 'Impala', 'X5', 'Altima', 'Elantra'];
@@ -24,11 +20,11 @@ function generateRandomVehicles(count = 100) {
     const registration = `NS${digits}${letters}`;
 
     vehicles.push({
-      registration,
+      year: (2000 + Math.floor(Math.random() * 23)).toString(),
       brand: brands[Math.floor(Math.random() * brands.length)],
       model: models[Math.floor(Math.random() * models.length)],
-      makeYear: 2000 + Math.floor(Math.random() * 23),
       colour: colors[Math.floor(Math.random() * colors.length)],
+      registration
     });
   }
   return vehicles;
@@ -48,4 +44,12 @@ async function uploadVehiclesOnce() {
   }
 }
 
- await uploadVehiclesOnce();
+async function init() {
+  await uploadVehiclesOnce();
+
+  const app = createApp(App);
+  app.use(router);
+  app.mount('#app');
+}
+
+init();
