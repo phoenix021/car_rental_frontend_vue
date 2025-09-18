@@ -39,8 +39,14 @@ const error = ref('');
 onMounted(async () => {
   try {
     const response = await getAllVehicles();
-    vehicles.value = response.data;
+    vehicles.value = response.data; // will be [] if no vehicles
+    if (vehicles.value.length === 0) {
+      error.value = 'No vehicles found';
+    } else {
+      error.value = '';
+    }
   } catch (err) {
+    console.error(err);
     error.value = err.response?.data?.message || 'Failed to load vehicles.';
   }
 });

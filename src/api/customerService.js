@@ -9,3 +9,7 @@ export function getAllCustomers() {
 export function addCustomer(customer) {
   return axios.post(`${API_BASE}/add`, customer);
 }
+
+export function deleteCustomerByLicence(licenceNumber) {
+  return axios.delete(`${API_BASE}/delete/${licenceNumber}`);
+}
