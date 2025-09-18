@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="vehicle in filteredVehicles" :key="vehicle.registration">
+        <tr v-for="vehicle in paginatedVehicles" :key="vehicle.registration">
           <td>{{ vehicle.registration }}</td>
           <td>{{ vehicle.brand }}</td>
           <td>{{ vehicle.model }}</td>
@@ -63,11 +63,31 @@
     </table>
 
     <div v-else class="alert alert-info">No vehicles available.</div>
+
+    <nav aria-label="Page navigation" class="mt-3">
+        <ul class="pagination justify-content-center">
+            <li :class="['page-item', { disabled: currentPage === 1 }]">
+            <button class="page-link" @click="currentPage--" :disabled="currentPage === 1">Previous</button>
+            </li>
+
+            <li
+            v-for="page in totalPages"
+            :key="page"
+            :class="['page-item', { active: currentPage === page }]"
+            >
+            <button class="page-link" @click="currentPage = page">{{ page }}</button>
+            </li>
+
+            <li :class="['page-item', { disabled: currentPage === totalPages }]">
+            <button class="page-link" @click="currentPage++" :disabled="currentPage === totalPages">Next</button>
+            </li>
+        </ul>
+        </nav>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { getAllVehicles } from '../api/vehicleService';
 import { listRentedVehicles } from '../api/rentalService';
 
@@ -80,6 +100,9 @@ const search = ref({
   model: '',
   year: ''
 });
+
+const currentPage = ref(1);
+const itemsPerPage = ref(5);
 
 onMounted(async () => {
   try {
@@ -105,4 +128,16 @@ const filteredVehicles = computed(() => {
     );
   });
 });
+
+const totalPages = computed(() => Math.ceil(filteredVehicles.value.length / itemsPerPage.value));
+
+const paginatedVehicles = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+  return filteredVehicles.value.slice(start, end);
+});
+
+watch(search, () => {
+  currentPage.value = 1;
+}, { deep: true });
 </script>
