@@ -9,31 +9,19 @@ defineProps({
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
+    <h1 class="display-5 fw-semibold text-white">{{ msg }}</h1>
   </div>
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
+.greetings {
+  padding: 0.5rem 0;
 }
 
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
+/* Optional: adjust spacing on larger screens */
 @media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
+  .greetings {
+    padding: 1rem 0;
   }
 }
 </style>

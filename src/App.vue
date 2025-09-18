@@ -1,63 +1,89 @@
 <!-- src/App.vue -->
- <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
-<script setup></script>
-
 <template>
-  <header>
-    <div class="wrapper">
-      <HelloWorld msg="Welcome to your car rental service!" />
-    </div>
-  </header>
+  <div id="app">
+    <!-- Header -->
+    <header class="app-header">
+      <h1>Car Rental App</h1>
+    </header>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
-      <router-link to="/" class="navbar-brand">Car Rental App</router-link>
-      <div class="navbar-nav">
-        <router-link class="nav-link" to="/customers">Customers</router-link>
-        <router-link class="nav-link" to="/customers/new">Add Customer</router-link>
-        <router-link class="nav-link" to="/vehicles/new">Add Vehicle</router-link>
-        <router-link class="nav-link" to="/rentals/rent">Rent Vehicle</router-link>
-        <router-link class="nav-link" to="/rentals/rented-vehicles">Rented Vehicles</router-link>
-        <router-link class="nav-link" to="/rental/return">Return Vehicle</router-link>
-        <router-link class="nav-link" to="/vehicles">Vehicles</router-link>
-      </div>
-  </nav>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <router-link to="/" class="nav-link">Home</router-link>
+      <router-link to="/customers" class="nav-link">Customers</router-link>
+      <router-link to="/customers/new" class="nav-link">Add Customer</router-link>
+      <router-link to="/vehicles/new" class="nav-link">Add Vehicle</router-link>
+      <router-link to="/rentals/rented-vehicles" class="nav-link">Rented Vehicles</router-link>
+      <router-link to="/rental/return" class="nav-link">Return Vehicle</router-link>
+      <router-link to="/vehicles" class="nav-link">Vehicles</router-link>
+    </nav>
 
+    <!-- Main Content -->
+    <main class="main-content">
+      <router-view />
+    </main>
 
-  <main>
-     <router-view />
-  </main>
-
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2025 Jelena Zivanic Ltd. | jelena.zivanic@one.pmf.uns.ac.rs | +381 234 567 890 | Novi Sad, Serbia</p>
+    </footer>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+/* App Layout */
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+/* Header */
+.app-header {
+  background-color: #00796b;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+/* Navbar */
+.navbar {
+  background-color: #b2dfdb;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+.navbar .nav-link {
+  color: #004d40;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.navbar .nav-link:hover {
+  background-color: #80cbc4;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  overflow-y: auto;
+}
+
+/* Footer */
+.footer {
+  background-color: #004d40;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
 }
 </style>

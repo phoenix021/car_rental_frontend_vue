@@ -78,23 +78,29 @@
     <div v-else class="alert alert-info">No vehicles available.</div>
 
     <nav aria-label="Page navigation" class="mt-3">
-        <ul class="pagination justify-content-center">
+            <ul class="pagination justify-content-center">
             <li :class="['page-item', { disabled: currentPage === 1 }]">
-            <button class="page-link" @click="currentPage--" :disabled="currentPage === 1">Previous</button>
+                <button class="page-link" @click="currentPage--" :disabled="currentPage === 1">Previous</button>
             </li>
 
             <li
-            v-for="page in totalPages"
-            :key="page"
-            :class="['page-item', { active: currentPage === page }]"
+                v-for="page in visiblePages"
+                :key="page"
+                :class="['page-item', { active: currentPage === page, disabled: page === '...' }]"
             >
-            <button class="page-link" @click="currentPage = page">{{ page }}</button>
+                <button
+                class="page-link"
+                @click="typeof page === 'number' && (currentPage = page)"
+                :disabled="page === '...'"
+                >
+                {{ page }}
+                </button>
             </li>
 
             <li :class="['page-item', { disabled: currentPage === totalPages }]">
-            <button class="page-link" @click="currentPage++" :disabled="currentPage === totalPages">Next</button>
+                <button class="page-link" @click="currentPage++" :disabled="currentPage === totalPages">Next</button>
             </li>
-        </ul>
+            </ul>
         </nav>
   </div>
 </template>
@@ -155,4 +161,25 @@ const paginatedVehicles = computed(() => {
 watch(search, () => {
   currentPage.value = 1;
 }, { deep: true });
+
+const visiblePages = computed(() => {
+  const pages = [];
+  const total = totalPages.value;
+  const current = currentPage.value;
+
+  if (total <= 7) {
+    for (let i = 1; i <= total; i++) pages.push(i);
+  } else {
+    if (current <= 4) {
+      pages.push(1, 2, 3, 4, 5, '...', total);
+    } else if (current >= total - 3) {
+      pages.push(1, '...', total - 4, total - 3, total - 2, total - 1, total);
+    } else {
+      pages.push(1, '...', current - 1, current, current + 1, '...', total);
+    }
+  }
+
+  return pages;
+});
+
 </script>
