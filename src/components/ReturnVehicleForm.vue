@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { returnVehicle } from '../api/rentalService';
 import { useRoute } from 'vue-router';
 const route = useRoute();

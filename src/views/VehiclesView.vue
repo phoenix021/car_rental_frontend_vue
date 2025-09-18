@@ -23,20 +23,23 @@
           <td>{{ vehicle.model }}</td>
           <td>{{ vehicle.year }}</td>
           <td>{{ vehicle.colour }}</td>
-          <td>
+            <td>
             <router-link
-             :to="{ name: 'RentVehicle', params: { registration: vehicle.registration } }"
-                class="btn btn-sm btn-primary"
-                >
-                 Rent
+                v-if="!isRented(vehicle.registration)"
+                :to="{ name: 'RentVehicle', params: { registration: vehicle.registration } }"
+                class="btn btn-sm btn-primary me-2"
+            >
+                Rent
             </router-link>
+
             <router-link
-                 :to="{ name: 'ReturnVehicle', params: { registration: vehicle.registration } }"
-                    class="btn btn-sm btn-warning"
-                >
-                 Return
+                v-else
+                :to="{ name: 'ReturnVehicle', params: { registration: vehicle.registration } }"
+                class="btn btn-sm btn-warning"
+            >
+                Return
             </router-link>
-          </td>
+            </td>
         </tr>
       </tbody>
     </table>
@@ -48,16 +51,23 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { getAllVehicles } from '../api/vehicleService';
+import { listRentedVehicles } from '../api/rentalService';
 
 const vehicles = ref([]);
 const error = ref('');
+const rentedRegistrations = ref([]);
 
 onMounted(async () => {
   try {
     const response = await getAllVehicles();
     vehicles.value = response.data;
+
+    const rentedResponse = await listRentedVehicles();
+    rentedRegistrations.value = rentedResponse.data.map(v => v.registration);
   } catch (err) {
     error.value = err.response?.data?.message || 'Failed to load vehicles.';
   }
 });
+
+const isRented = (registration) => rentedRegistrations.value.includes(registration);
 </script>
