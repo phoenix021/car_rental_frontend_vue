@@ -20,6 +20,19 @@
             <div class="col-md-3">
                 <input v-model="search.year" type="number" class="form-control" placeholder="Year" />
             </div>
+            <div class="col-md-3 d-flex align-items-center">
+            <div class="form-check mt-2">
+                <input
+                class="form-check-input"
+                type="checkbox"
+                id="availableOnly"
+                v-model="search.availableOnly"
+                />
+                <label class="form-check-label" for="availableOnly">
+                Available Only
+                </label>
+            </div>
+            </div>
         </div>
     </div>
 
@@ -98,7 +111,8 @@ const search = ref({
   registration: '',
   brand: '',
   model: '',
-  year: ''
+  year: '',
+  availableOnly: false
 });
 
 const currentPage = ref(1);
@@ -124,10 +138,11 @@ const filteredVehicles = computed(() => {
       (!search.value.registration || vehicle.registration.toLowerCase().includes(search.value.registration.toLowerCase())) &&
       (!search.value.brand || vehicle.brand.toLowerCase().includes(search.value.brand.toLowerCase())) &&
       (!search.value.model || vehicle.model.toLowerCase().includes(search.value.model.toLowerCase())) &&
-      (!search.value.year || vehicle.year.toString().includes(search.value.year.toString()))
+      (!search.value.year || vehicle.year.toString().includes(search.value.year.toString())) &&
+      (!search.value.availableOnly || !isRented(vehicle.registration))
     );
   });
-});
+}); 
 
 const totalPages = computed(() => Math.ceil(filteredVehicles.value.length / itemsPerPage.value));
 
