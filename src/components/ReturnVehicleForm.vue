@@ -38,10 +38,20 @@
 <script setup>
 import { ref } from 'vue';
 import { returnVehicle } from '../api/rentalService';
+import { useRoute } from 'vue-router';
+const route = useRoute();
 
 const form = ref({
   registration: '',
   driverLicenceNumber: ''
+});
+
+onMounted(() => {
+  const regParam = route.params.registration || '';
+  if (regParam) {
+    form.value.registration = regParam;
+  }
+
 });
 
 const error = ref('');

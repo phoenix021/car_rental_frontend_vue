@@ -16,7 +16,7 @@ const routes = [
   { path: '/vehicles', name: 'Vehicles', component: VehiclesView },
   { path: '/rentals/rent/:registration?', name: 'RentVehicle', component: RentVehicleForm },
   { path: '/rentals/rented-vehicles', name: 'RentedVehicles', component: RentedVehiclesList },
-  { path: '/rental/return', name: 'ReturnVehicle', component: ReturnVehicleForm },
+  { path: '/rental/return:registration?', name: 'ReturnVehicle', component: ReturnVehicleForm },
 ];
 
 const router = createRouter({

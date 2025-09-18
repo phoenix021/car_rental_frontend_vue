@@ -30,6 +30,12 @@
                 >
                  Rent
             </router-link>
+            <router-link
+                 :to="{ name: 'ReturnVehicle', params: { registration: vehicle.registration } }"
+                    class="btn btn-sm btn-warning"
+                >
+                 Return
+            </router-link>
           </td>
         </tr>
       </tbody>
