@@ -16,7 +16,88 @@
   color: #0d6efd; /* Bootstrap primary color */
 }
 
+.container,
+.container-fluid {
+  width: 100%; /* or max-width: 100%; */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+.app-header {
+  background-color: #00796b;
+  color: white;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+  
+/* Navbar */
+.navbar {
+  background-color: #b2dfdb;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+}
+
+.navbar .nav-link {
+  color: #004d40;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.navbar .nav-link:hover {
+  background-color: #80cbc4;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  overflow-y: auto;
+}
+
+/* Footer */
+.footer {
+  background-color: #004d40;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+
+::v-deep(.router-link-exact-active) {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 .nav-link:hover {
   background-color: rgba(13, 110, 253, 0.1); /* Light hover effect */
   border-radius: 5px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  text-decoration: underline;
 }

@@ -8,23 +8,23 @@
 
     <!-- Navbar -->
     <nav class="navbar">
-      <router-link to="/" class="nav-link">Home</router-link>
-      <router-link to="/customers" class="nav-link">Customers</router-link>
-      <router-link to="/customers/new" class="nav-link">Add Customer</router-link>
-      <router-link to="/vehicles/new" class="nav-link">Add Vehicle</router-link>
-      <router-link to="/rentals/rented-vehicles" class="nav-link">Rented Vehicles</router-link>
-      <router-link to="/rental/return" class="nav-link">Return Vehicle</router-link>
-      <router-link to="/vehicles" class="nav-link">Vehicles</router-link>
+      <router-link to="/" class="nav-link" active-class="active">Home</router-link>
+      <router-link to="/customers" class="nav-link" active-class="active">Customers</router-link>
+      <router-link to="/customers/new" class="nav-link" active-class="active">Add Customer</router-link>
+      <router-link to="/vehicles/new" class="nav-link" active-class="active">Add Vehicle</router-link>
+      <router-link to="/rentals/rented-vehicles" class="nav-link" active-class="active">Rented Vehicles</router-link>
+      <router-link to="/rental/return" class="nav-link" active-class="active">Return Vehicle</router-link>
+      <router-link to="/vehicles" class="nav-link" active-class="active">Vehicles</router-link>
     </nav>
 
     <!-- Main Content -->
     <main class="main-content">
-      <router-view />
+      <router-view /> 
     </main>
 
     <!-- Footer -->
     <footer class="footer">
-      <p>© 2025 Jelena Zivanic Ltd. | jelena.zivanic@one.pmf.uns.ac.rs | +381 234 567 890 | Novi Sad, Serbia</p>
+      <p>© 2025 Jelena Zivanic 250m/23 Ltd. | jelena.zivanic@one.pmf.uns.ac.rs | +381 234 567 890 | University of Novi Sad, Serbia</p>
     </footer>
   </div>
 </template>
@@ -35,16 +35,23 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 /* Header */
 .app-header {
   background-color: #00796b;
   color: white;
-  padding: 1rem;
   text-align: center;
   font-size: 1.8rem;
   font-weight: bold;
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 /* Navbar */
@@ -86,4 +93,21 @@
   padding: 1rem;
   font-size: 0.9rem;
 }
+
+
+::v-deep(.router-link-exact-active) {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.nav-link:hover {
+  background-color: rgba(13, 110, 253, 0.1); /* Light hover effect */
+  border-radius: 5px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 </style>

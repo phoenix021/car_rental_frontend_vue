@@ -1,6 +1,6 @@
 <!-- src/views/CustomersView.vue -->
 <template>
-  <div class="container mt-4">
+  <div class="container-fluid mt-4">
     <h2>All Customers</h2>
 
     <div v-if="error" class="alert alert-danger">{{ error }}</div>
