@@ -1,15 +1,19 @@
+<!-- src/views/VehiclesView.vue -->
 <template>
   <div class="container mt-4">
     <h2>All Vehicles</h2>
 
-    <table class="table table-bordered">
+    <div v-if="error" class="alert alert-danger">{{ error }}</div>
+
+    <table v-if="vehicles.length" class="table table-striped">
       <thead>
         <tr>
           <th>Registration</th>
           <th>Brand</th>
           <th>Model</th>
-          <th>Colour</th>
           <th>Year</th>
+          <th>Color</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -17,20 +21,26 @@
           <td>{{ vehicle.registration }}</td>
           <td>{{ vehicle.brand }}</td>
           <td>{{ vehicle.model }}</td>
-          <td>{{ vehicle.colour }}</td>
           <td>{{ vehicle.year }}</td>
+          <td>{{ vehicle.colour }}</td>
+          <td>
+            <router-link
+             :to="{ name: 'RentVehicle', params: { registration: vehicle.registration } }"
+                class="btn btn-sm btn-primary"
+                >
+                 Rent
+            </router-link>
+          </td>
         </tr>
       </tbody>
     </table>
 
-    <div v-if="error" class="alert alert-danger mt-3">
-      {{ error }}
-    </div>
+    <div v-else class="alert alert-info">No vehicles available.</div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { getAllVehicles } from '../api/vehicleService';
 
 const vehicles = ref([]);
@@ -39,14 +49,8 @@ const error = ref('');
 onMounted(async () => {
   try {
     const response = await getAllVehicles();
-    vehicles.value = response.data; // will be [] if no vehicles
-    if (vehicles.value.length === 0) {
-      error.value = 'No vehicles found';
-    } else {
-      error.value = '';
-    }
+    vehicles.value = response.data;
   } catch (err) {
-    console.error(err);
     error.value = err.response?.data?.message || 'Failed to load vehicles.';
   }
 });

@@ -10,13 +10,13 @@ import ReturnVehicleForm from '../components/ReturnVehicleForm.vue';
 
 const routes = [
   { path: '/', redirect: '/customers' },
-  { path: '/customers', component: CustomersView },
-  { path: '/customers/new', component: CustomerForm },
-  { path: '/vehicles/new', component: VehicleForm },
-  { path: '/rentals/rent', component: RentVehicleForm },
-  { path: '/rentals/rented-vehicles', component: RentedVehiclesList },
-  { path: '/rental/return', component: ReturnVehicleForm },
-  { path: '/vehicles', component: VehiclesView },
+  { path: '/customers', name: 'Customers', component: CustomersView },
+  { path: '/customers/new', name: 'AddCustomer', component: CustomerForm },
+  { path: '/vehicles/new', name: 'AddVehicle', component: VehicleForm },
+  { path: '/vehicles', name: 'Vehicles', component: VehiclesView },
+  { path: '/rentals/rent/:registration?', name: 'RentVehicle', component: RentVehicleForm },
+  { path: '/rentals/rented-vehicles', name: 'RentedVehicles', component: RentedVehiclesList },
+  { path: '/rental/return', name: 'ReturnVehicle', component: ReturnVehicleForm },
 ];
 
 const router = createRouter({
