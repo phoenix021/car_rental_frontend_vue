@@ -6,6 +6,7 @@ import VehiclesView from '../views/VehiclesView.vue';
 import RentVehicleForm from '../components/RentVehicleForm.vue';
 import RentedVehiclesList from '../components/RentedVehiclesList.vue';
 import ReturnVehicleForm from '../components/ReturnVehicleForm.vue';
+import CustomerDetails from '../components/CustomerDetails.vue'
 
 
 const routes = [
@@ -17,6 +18,7 @@ const routes = [
   { path: '/rentals/rent/:registration?', name: 'RentVehicle', component: RentVehicleForm },
   { path: '/rentals/rented-vehicles', name: 'RentedVehicles', component: RentedVehiclesList },
   { path: '/rental/return:registration?', name: 'ReturnVehicle', component: ReturnVehicleForm },
+  { path: '/customers/:driverLicenceNumber',  name: 'CustomerDetails', component: CustomerDetails}
 ];
 
 const router = createRouter({

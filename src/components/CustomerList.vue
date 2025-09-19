@@ -30,6 +30,7 @@
           <th>Last Name</th>
           <th>Driver Licence</th>
           <th>Birth Date</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -38,6 +39,10 @@
           <td>{{ customer.lastName }}</td>
           <td>{{ customer.driverLicenceNumber }}</td>
           <td>{{ customer.birthDate }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary me-2" @click="editCustomer(customer)">Edit</button>
+            <button class="btn btn-sm btn-info" @click="showDetails(customer)">Details</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -74,8 +79,10 @@
 
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import { getAllCustomers } from '../api/customerService'; // <-- You'll need to create this
 
+const router = useRouter();
 const customers = ref([]);
 const error = ref('');
 
@@ -140,4 +147,19 @@ const visiblePages = computed(() => {
 
   return pages;
 });
+
+const editCustomer = (customer) => {
+  // Navigate to edit page, assuming you have a route like /customers/edit/:id
+  // For example, using Vue Router:
+  router.push({ name: 'CustomerForm', params: { driverLicenceNumber: customer.driverLicenceNumber } });
+};
+
+const showDetails = (customer) => {
+  router.push({
+    name: 'CustomerDetails',
+    params: { driverLicenceNumber: customer.driverLicenceNumber },
+    state: { customer }
+  });
+};
+
 </script>

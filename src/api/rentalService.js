@@ -16,3 +16,7 @@ export function returnVehicle(registrationPlate, driversLicence) {
     params: { registrationPlate, driversLicence }
   });
 }
+
+export function getCustomerRentals(driverLicenceNumber) {
+  return axios.get(`/api/customer/${driverLicenceNumber}/rentals`);
+}

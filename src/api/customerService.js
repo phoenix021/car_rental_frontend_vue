@@ -13,3 +13,7 @@ export function addCustomer(customer) {
 export function deleteCustomerByLicence(licenceNumber) {
   return axios.delete(`${API_BASE}/delete/${licenceNumber}`);
 }
+
+export function getCustomerByLicence(licenceNumber) {
+  return axios.get(`${API_BASE}/get/${licenceNumber}`);
+}
