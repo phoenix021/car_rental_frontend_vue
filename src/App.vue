@@ -13,7 +13,6 @@
       <router-link to="/customers/new" class="nav-link" active-class="active">Add Customer</router-link>
       <router-link to="/vehicles/new" class="nav-link" active-class="active">Add Vehicle</router-link>
       <router-link to="/rentals/rented-vehicles" class="nav-link" active-class="active">Rented Vehicles</router-link>
-      <router-link to="/rental/return" class="nav-link" active-class="active">Return Vehicle</router-link>
       <router-link to="/vehicles" class="nav-link" active-class="active">Vehicles</router-link>
     </nav>
 
