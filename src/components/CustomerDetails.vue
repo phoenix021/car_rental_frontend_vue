@@ -39,6 +39,15 @@
               <span v-if="!rental.returnDateTime" class="badge bg-success">Currently Rented</span>
               <span v-else class="badge bg-secondary">Returned</span>
             </td>
+            <td>
+              <button 
+                v-if="!rental.returnDateTime" 
+                class="btn btn-sm btn-warning"
+                @click="returnVehicle(rental.vehicle.registration, customer.driverLicenceNumber)"
+              >
+                Return
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -52,12 +61,14 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter} from 'vue-router';
 import { getCustomerRentals } from '../api/rentalService'; 
 import { getCustomerByLicence } from '../api/customerService'; 
+import ReturnVehicleForm from '@/components/ReturnVehicleForm.vue';
 
 
 const route = useRoute();
+const router = useRouter();
 const driverLicenceNumber = route.params.driverLicenceNumber;
 
 const rentals = ref([]);
@@ -98,4 +109,12 @@ const formatDate = (dateString) => {
     hour12: false, // or true if you prefer AM/PM
   }).format(new Date(dateString));
 };
+
+function returnVehicle(registration, driverLicenceNumber) {
+  router.push({
+    name: 'ReturnVehicle',
+    query: { registration, driverLicenceNumber },
+    params: { registration }
+  });
+} 
 </script>

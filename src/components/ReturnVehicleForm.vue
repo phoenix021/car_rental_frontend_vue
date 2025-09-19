@@ -36,14 +36,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { returnVehicle } from '../api/rentalService';
 import { useRoute } from 'vue-router';
 const route = useRoute();
 
+const registration = route.query.registration;
+const driverLicenceNumber = route.query.driverLicenceNumber;
+
 const form = ref({
-  registration: '',
-  driverLicenceNumber: ''
+  registration: registration || '',
+  driverLicenceNumber: driverLicenceNumber || ''
 });
 
 onMounted(() => {
@@ -69,4 +72,13 @@ const handleReturn = async () => {
     error.value = err.response?.data?.message || 'Failed to return vehicle.';
   }
 };
+
+watch(
+  () => route.query,
+  (newQuery) => {
+    form.value.registration = newQuery.registration || '';
+    form.value.driverLicenceNumber = newQuery.driverLicenceNumber || '';
+  },
+  { immediate: true }
+);
 </script>
